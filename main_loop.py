@@ -4,6 +4,7 @@ import pygame as pg
 import pymunk as pm
 import pymunk.pygame_util
 import constants
+from spaceship import Spaceship
 
 
 class GameStates(Enum):
@@ -35,6 +36,9 @@ class MainLoop:
         self._debug = True
 
         self._state = GameStates.RUNNING
+
+        # create spaceship
+        self._space_ship = Spaceship(self._space, self._screen)
 
     def run(self):
         # game loop
@@ -69,7 +73,7 @@ class MainLoop:
 
     def update(self):
         # Updates the states of all objects and the screen
-        pass
+        self._space_ship.update()
         # if self._level:
         #     self._level.update()
 
