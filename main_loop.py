@@ -5,6 +5,7 @@ import pymunk as pm
 import pymunk.pygame_util
 import constants
 from spaceship import Spaceship
+from test_area import TestArea
 
 
 class GameStates(Enum):
@@ -20,7 +21,7 @@ class MainLoop:
         self._screen = pg.display.set_mode((constants.WIDTH, constants.HEIGHT), pg.RESIZABLE)
 
         self._clock = pg.time.Clock()
-        self._background_img = pg.image.load("images/background.png")
+        self._background_img = pg.image.load("images/background_1080p.png")
 
         # setup Pymunk space
         self._space = pm.Space()
@@ -36,6 +37,9 @@ class MainLoop:
         self._debug = True
 
         self._state = GameStates.RUNNING
+
+        # create level
+        self.test_area = TestArea(self._space)
 
         # create spaceship
         self._space_ship = Spaceship(self._space, self._screen)
@@ -90,8 +94,7 @@ class MainLoop:
 
         if self._debug:
             self._space.debug_draw(self._draw_options)
-        # else:
-        #     self._draw_road()
+        self._space_ship.draw()
 
 
 
